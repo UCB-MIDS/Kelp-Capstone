@@ -1,0 +1,1 @@
+This is an incomplete dataset of bathymetry from https://pubs.usgs.gov/of/2004/1221/datagrd.html. The file formats can be found in both ARCINFO GRID and XYZ. A map of the la regions is placed here as well

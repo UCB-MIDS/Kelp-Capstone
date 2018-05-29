@@ -1,0 +1,3 @@
+200002171110   1    22     0pete asciigrid dume.utm.dtm.arc dumegrd float
+200404061214   1     0     0pete projectdefine grid dumegrd
+200404061215   0     1   169pete copy ../../dumegrd dumebatg
