@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Bokeh Plot</title>
+        
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.15.min.css" type="text/css" />
+        
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.15.min.js"></script>
+<script type="text/javascript">
+    Bokeh.set_log_level("info");
+</script>
+    </head>
+    <body>
+        
+        <div class="bk-root">
+            <div class="bk-plotdiv" id="62d9a189-c340-406d-b063-dc1f8fb0e368"></div>
+        </div>
+        
+        <script type="application/json" id="cfb7b47e-aac0-4b83-a798-9a566ae99195">
+          {"8beaa929-cf4b-479a-a086-1e3f3ca19201":{"roots":{"references":[{"attributes":{"formatter":{"id":"a970629e-01b0-4001-975a-3e5d2ec00c44","type":"MercatorTickFormatter"},"plot":{"id":"69b98266-b18b-427e-80fe-1292820edc8d","subtype":"GMap","type":"GMapPlot"},"ticker":{"id":"15daaa78-b0ae-4895-95bc-08f2e1b2a6c8","type":"MercatorTicker"}},"id":"d65243f4-e384-4f6c-9494-81520e80c9a4","type":"LinearAxis"},{"attributes":{},"id":"0771968f-98d7-4b61-9ba0-aab0b07f4bcd","type":"PanTool"},{"attributes":{"formatter":{"id":"d6a79380-c358-44fc-b8f5-ac4ca2e189fe","type":"MercatorTickFormatter"},"plot":{"id":"69b98266-b18b-427e-80fe-1292820edc8d","subtype":"GMap","type":"GMapPlot"},"ticker":{"id":"b061ee92-0a77-4bb2-87ae-43ffff1adf5e","type":"MercatorTicker"}},"id":"4f7aeed4-15b4-4595-b006-1c050360dc41","type":"LinearAxis"},{"attributes":{"fill_alpha":{"value":0.8},"fill_color":{"value":"green"},"line_color":{"value":"white"},"line_width":{"value":0.5},"xs":{"field":"x"},"ys":{"field":"y"}},"id":"cc201235-56bc-4eda-b026-f83a8ab99d92","type":"Patches"},{"attributes":{"callback":null},"id":"e7970a0d-3255-4c92-bc02-ea86d4527921","type":"HoverTool"},{"attributes":{"source":{"id":"0c6ecb03-dfe1-4fe8-9c83-ba8875c18be9","type":"ColumnDataSource"}},"id":"0206d0ee-f068-4733-aa0b-87052d1708c5","type":"CDSView"},{"attributes":{"callback":null},"id":"feafa0f1-37f1-4257-b4ae-7f6ad24dc653","type":"Range1d"},{"attributes":{},"id":"10fa4921-89f1-435d-b991-6b6d6e23d194","type":"WheelZoomTool"},{"attributes":{"dimension":"lon"},"id":"b061ee92-0a77-4bb2-87ae-43ffff1adf5e","type":"MercatorTicker"},{"attributes":{"callback":null,"column_names":["x","y","kelp","bathymetry"],"data":{"bathymetry":[-45.0,-22.0,-86.0,-22.0,23.0,-48.0,-7.0,3.0,-30.0,-22.0,-11.0,-12.0,-11.0,-12.0,-19.0],"kelp":[1090.8082191780823,730.9411764705883,503.0,1030.7605633802816,451.875,689.4583333333334,664.3684210526316,600.047619047619,636.0,652.0692307692308,742.4347826086956,866.1379310344828,1467.3275862068965,1609.536231884058,828.8181818181819],"x":[[-121.9357354,-121.9357354,-121.9257354,-121.9257354,-121.9357354],[-121.9357354,-121.9357354,-121.9257354,-121.9257354,-121.9357354],[-121.9854342,-121.9854342,-121.9754342,-121.9754342,-121.9854342],[-121.97549444,-121.97549444,-121.96549444,-121.96549444,-121.97549444],[-121.95561492,-121.95561492,-121.94561492,-121.94561492,-121.95561492],[-121.9854342,-121.9854342,-121.9754342,-121.9754342,-121.9854342],[-121.95561492,-121.95561492,-121.94561492,-121.94561492,-121.95561492],[-121.90591612,-121.90591612,-121.89591612,-121.89591612,-121.90591612],[-121.95561492,-121.95561492,-121.94561492,-121.94561492,-121.95561492],[-121.92579564,-121.92579564,-121.91579564,-121.91579564,-121.92579564],[-122.035133,-122.035133,-122.025133,-122.025133,-122.035133],[-122.02519324000001,-122.02519324000001,-122.01519324,-122.01519324,-122.02519324000001],[-121.9854342,-121.9854342,-121.9754342,-121.9754342,-121.9854342],[-121.97549444,-121.97549444,-121.96549444,-121.96549444,-121.97549444],[-121.95561492,-121.95561492,-121.94561492,-121.94561492,-121.95561492]],"y":[[36.535101999999995,36.525102,36.525102,36.535101999999995,36.535101999999995],[36.55488713043478,36.54488713043478,36.54488713043478,36.55488713043478,36.55488713043478],[36.564672260869564,36.57467226086956,36.57467226086956,36.564672260869564,36.564672260869564],[36.57467226086956,36.564672260869564,36.564672260869564,36.57467226086956,36.57467226086956],[36.57467226086956,36.564672260869564,36.564672260869564,36.57467226086956,36.57467226086956],[36.584564826086954,36.574564826086956,36.574564826086956,36.584564826086954,36.584564826086954],[36.62413508695652,36.61413508695652,36.61413508695652,36.62413508695652,36.62413508695652],[36.62413508695652,36.61413508695652,36.61413508695652,36.62413508695652,36.62413508695652],[36.624027652173915,36.63402765217391,36.63402765217391,36.624027652173915,36.624027652173915],[36.63402765217391,36.624027652173915,36.624027652173915,36.63402765217391,36.63402765217391],[36.950589739130436,36.94058973913044,36.94058973913044,36.950589739130436,36.950589739130436],[36.950589739130436,36.94058973913044,36.94058973913044,36.950589739130436,36.950589739130436],[36.950589739130436,36.94058973913044,36.94058973913044,36.950589739130436,36.950589739130436],[36.950589739130436,36.94058973913044,36.94058973913044,36.950589739130436,36.950589739130436],[36.97037486956522,36.96037486956522,36.96037486956522,36.97037486956522,36.97037486956522]]},"selected":null,"selection_policy":null},"id":"0c6ecb03-dfe1-4fe8-9c83-ba8875c18be9","type":"ColumnDataSource"},{"attributes":{},"id":"290960ea-9fe6-4047-a2c5-d8f8e9d0aaae","type":"ResetTool"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_scroll":"auto","active_tap":"auto","tools":[{"id":"0771968f-98d7-4b61-9ba0-aab0b07f4bcd","type":"PanTool"},{"id":"10fa4921-89f1-435d-b991-6b6d6e23d194","type":"WheelZoomTool"},{"id":"290960ea-9fe6-4047-a2c5-d8f8e9d0aaae","type":"ResetTool"},{"id":"2c03aa69-0a99-4dc7-a746-e0fae9afa8ab","type":"HelpTool"},{"id":"e7970a0d-3255-4c92-bc02-ea86d4527921","type":"HoverTool"}]},"id":"0506684a-2bb7-4eee-9ea0-e41eddf66766","type":"Toolbar"},{"attributes":{},"id":"2c03aa69-0a99-4dc7-a746-e0fae9afa8ab","type":"HelpTool"},{"attributes":{"lat":36.786335,"lng":-121.905312,"zoom":10},"id":"04d5e271-b1cc-44ae-b905-b147d94c9e0c","type":"GMapOptions"},{"attributes":{"data_source":{"id":"0c6ecb03-dfe1-4fe8-9c83-ba8875c18be9","type":"ColumnDataSource"},"glyph":{"id":"cc201235-56bc-4eda-b026-f83a8ab99d92","type":"Patches"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"98cfc466-78ed-44a2-94ff-44d9d90f6640","type":"Patches"},"selection_glyph":null,"view":{"id":"0206d0ee-f068-4733-aa0b-87052d1708c5","type":"CDSView"}},"id":"703b180b-c5be-4615-bc7a-2347b89ba0a4","type":"GlyphRenderer"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"line_width":{"value":0.5},"xs":{"field":"x"},"ys":{"field":"y"}},"id":"98cfc466-78ed-44a2-94ff-44d9d90f6640","type":"Patches"},{"attributes":{},"id":"2bca4828-80de-4403-9b89-c3366671f93b","type":"LinearScale"},{"attributes":{},"id":"191e0d30-c3bc-4241-bc99-c56bc213fe5a","type":"LinearScale"},{"attributes":{"dimension":"lon"},"id":"d6a79380-c358-44fc-b8f5-ac4ca2e189fe","type":"MercatorTickFormatter"},{"attributes":{"plot":null,"text":"Monterey Kelp"},"id":"9cca51c9-f163-4b60-a63a-a1437138cc1c","type":"Title"},{"attributes":{"callback":null},"id":"cf608642-68aa-4c83-8476-5be8f2ec5640","type":"Range1d"},{"attributes":{"api_key":"AIzaSyAqMlpFrenE6SClJJ15goq0GmY-MDeN8tg","below":[{"id":"4f7aeed4-15b4-4595-b006-1c050360dc41","type":"LinearAxis"}],"left":[{"id":"d65243f4-e384-4f6c-9494-81520e80c9a4","type":"LinearAxis"}],"map_options":{"id":"04d5e271-b1cc-44ae-b905-b147d94c9e0c","type":"GMapOptions"},"renderers":[{"id":"4f7aeed4-15b4-4595-b006-1c050360dc41","type":"LinearAxis"},{"id":"d65243f4-e384-4f6c-9494-81520e80c9a4","type":"LinearAxis"},{"id":"703b180b-c5be-4615-bc7a-2347b89ba0a4","type":"GlyphRenderer"}],"title":{"id":"9cca51c9-f163-4b60-a63a-a1437138cc1c","type":"Title"},"toolbar":{"id":"0506684a-2bb7-4eee-9ea0-e41eddf66766","type":"Toolbar"},"x_range":{"id":"cf608642-68aa-4c83-8476-5be8f2ec5640","type":"Range1d"},"x_scale":{"id":"2bca4828-80de-4403-9b89-c3366671f93b","type":"LinearScale"},"y_range":{"id":"feafa0f1-37f1-4257-b4ae-7f6ad24dc653","type":"Range1d"},"y_scale":{"id":"191e0d30-c3bc-4241-bc99-c56bc213fe5a","type":"LinearScale"}},"id":"69b98266-b18b-427e-80fe-1292820edc8d","subtype":"GMap","type":"GMapPlot"},{"attributes":{"dimension":"lat"},"id":"15daaa78-b0ae-4895-95bc-08f2e1b2a6c8","type":"MercatorTicker"},{"attributes":{"dimension":"lat"},"id":"a970629e-01b0-4001-975a-3e5d2ec00c44","type":"MercatorTickFormatter"}],"root_ids":["69b98266-b18b-427e-80fe-1292820edc8d"]},"title":"Bokeh Application","version":"0.12.15"}}
+        </script>
+        <script type="text/javascript">
+          (function() {
+            var fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  var docs_json = document.getElementById('cfb7b47e-aac0-4b83-a798-9a566ae99195').textContent;
+                  var render_items = [{"docid":"8beaa929-cf4b-479a-a086-1e3f3ca19201","elementid":"62d9a189-c340-406d-b063-dc1f8fb0e368","modelid":"69b98266-b18b-427e-80fe-1292820edc8d"}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    var attempts = 0;
+                    var timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        embed_document(root);
+                        clearInterval(timer);
+                      }
+                      attempts++;
+                      if (attempts > 100) {
+                        console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing")
+                        clearInterval(timer);
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+    </body>
+</html>
