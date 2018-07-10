@@ -42,7 +42,7 @@ landsat_dir_name = args.landsat
 all_bands = os.listdir(landsat_dir_name)
 
 b4_file = [fn for fn in all_bands if fn.endswith("_B4.TIF")][0]
-b5_file = [fn for fn in all_bands if fn.endswith("_B3.TIF")][0]
+b5_file = [fn for fn in all_bands if fn.endswith("_B5.TIF")][0]
 color_file = [fn for fn in all_bands if fn.endswith("_T1.jpg")][0]
 
 
@@ -234,8 +234,8 @@ print("Saving data...")
 sea = grid[grid["mean_depth"] < 0].copy()
 kelp = sea[sea["mean_ndvi"] > filter_ndvi].copy()
 
-kelp["lat"] = (kelp["top"] - kelp["bottom"]) / 2.0
-kelp["lon"] = (kelp["right"] - kelp["left"]) / 2.0
+kelp["lat"] = (kelp["top"] - kelp["bottom"]) / 2.0 + kelp["bottom"]
+kelp["lon"] = (kelp["right"] - kelp["left"]) / 2.0 + kelp["left"]
 final_kelp=kelp[['lat','lon', 'mean_ndvi']]
 final_kelp.columns = ["lat", "lon", "ndvi"]
 final_kelp.to_csv(args.output, index=False)
