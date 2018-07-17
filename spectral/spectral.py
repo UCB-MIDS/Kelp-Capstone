@@ -26,10 +26,16 @@ parser = argparse.ArgumentParser(description='Calculate NDVI on Landsat images a
 parser.add_argument("landsat", help="path to dir containing a full set of Landsat image bands")
 parser.add_argument("bathymetry", help="path to file containing bathymetry data")
 parser.add_argument("output", help="path for resulting CSV dataset")
+parser.add_argument("--bathymetry2", help="additional path to file containing more bathymetry data")
 parser.add_argument("-g", "--gridsize", help="number of cells per side in grid", type=int, default=300)
 parser.add_argument("-q", "--quantile", help="quantile of extracted NDVI", type=float, default=0.99)
+parser.add_argument("-t", "--threshold", help="NDVI threshold", type=float)
 parser.add_argument("-i", "--image", help="generate image", action="store_true")
+parser.add_argument("-m", "--mindepth", help="min depth of water for detection", type=float, default=-5)
+parser.add_argument("-cx", "--correction_x", help="x correction in pixels to achieve precise alignment between bathymetry and spectral images", type=int, default=0)
+parser.add_argument("-cy", "--correction_y", help="y correction in pixels to achieve precise alignment between bathymetry and spectral images", type=int, default=0)
 args = parser.parse_args()
+
 
 # load images for bands 4 and 5 + the color image
 # note: matplotlib can only handle png natively
@@ -49,6 +55,11 @@ color_file = [fn for fn in all_bands if fn.endswith("_T1.jpg")][0]
 print("Reading Band 4 file: " + b4_file)
 print("Reading Band 5 file: " + b5_file)
 print("Reading Color file: " + color_file)
+print("Quantile: " + str(args.quantile))
+print("Threshold: " + str(args.threshold))
+print("Min depth: " + str(args.mindepth))
+print("Correction X: " + str(args.correction_x))
+print("Correction Y: " + str(args.correction_y))
 
 ###########################
 
@@ -107,14 +118,25 @@ grid_size_v = args.gridsize
 cell_size_pixel_h = int(image_width / grid_size_h)
 cell_size_pixel_v = int(image_height / grid_size_v)
 
+# how many lon/lat degrees
+
 # adjust boundaries so there's an integer number of cells in the grid
 image_width = cell_size_pixel_h * grid_size_h
 image_height = cell_size_pixel_v * grid_size_v
+
+# approximate tile size in degrees lat/lon
+x0, y0 = getLonLat(0,0)
+x1, y1 = getLonLat(cell_size_pixel_h, cell_size_pixel_v)
+cell_size_deg_v = y0-y1
+cell_size_deg_h = x1-x0
 
 print("-------------")
 print("Image size: " + str(image_width) + " by " + str(image_height))
 print("Grid size: " + str(grid_size_h) + " by " + str(grid_size_v))
 print("Pixel cell size: " + str(cell_size_pixel_h) + " by " + str(cell_size_pixel_v))
+print("Approx. lon cell size: " + str(cell_size_deg_h))
+print("Approx. lat cell size: " + str(cell_size_deg_v))
+
 print("-------------")
 
 b4 = b4[0:image_height, 0:image_width]
@@ -155,15 +177,22 @@ grid["bottom"] = np.array(bottom_lat).repeat(grid_size_h)
 grid["right"] = np.tile(right_lon, grid_size_v)
 
 ## Load bathymetry data
-print("Loading bathymetry...")
+print("Loading bathymetry data...")
 
 bathymetry_file = args.bathymetry
 depth = xr.open_dataset(bathymetry_file).to_dataframe()
 depth = depth.reset_index().dropna()
 depth.columns = ["lon", "lat", "depth"]
 
-depth["j"] = np.searchsorted(left_lon, depth["lon"]) + 1
-depth["i"] = np.searchsorted(-1 * np.array(top_lat), -1 * depth["lat"]) - 1
+if args.bathymetry2:
+    print("Loading additional bathymetry data...")
+    depth2 = xr.open_dataset(args.bathymetry2).to_dataframe()
+    depth2 = depth2.reset_index().dropna()
+    depth2.columns = ["lon", "lat", "depth"]
+    depth = depth.append(depth2)
+
+depth["j"] = np.searchsorted(left_lon, depth["lon"]) + args.correction_x
+depth["i"] = np.searchsorted(-1 * np.array(top_lat), -1 * depth["lat"]) + args.correction_y
 filtered_depth = pd.DataFrame(
     depth[(depth["i"] > 0) & (depth["j"] > 0) & (depth["i"] <= grid_size_v) & (depth["j"] <= grid_size_h)])
 filtered_depth["idx"] = filtered_depth["i"] * grid_size_h + filtered_depth["j"]
@@ -206,8 +235,13 @@ print("Finding kelp...")
 
 grid = grid.join(ndvi_grid)
 grid["mean_ndvi"] = grid["mean_ndvi"].astype(float)
-ndvi_values = pd.DataFrame(grid[grid["mean_depth"] < 0]).dropna()
-filter_ndvi = ndvi_values["mean_ndvi"].quantile(args.quantile)
+ndvi_values = pd.DataFrame(grid[grid["max_depth"] < args.mindepth]).dropna()
+filter_ndvi = args.threshold
+if filter_ndvi==None:
+    filter_ndvi = ndvi_values["mean_ndvi"].quantile(args.quantile)
+
+print("NDVI threshold: " + str(filter_ndvi))
+
 
 if args.image:
     # overlay grid on image
@@ -223,15 +257,15 @@ if args.image:
         image[row.pxtop:row.pxbottom, row.pxleft:row.pxright] = np.minimum(cell, [255, 255, 255]).astype(int)
 
     for row in grid.itertuples():
-        if row.mean_depth < 0 and row.mean_ndvi > filter_ndvi:
+        if np.isnan(row.max_depth) or row.max_depth>args.mindepth:
+            highlight_cell(color, [0, 0, 0], row)
+        elif row.max_depth < args.mindepth and row.mean_ndvi > filter_ndvi:
             highlight_cell(color, [255, 0, 0], row, True)
-        else:
-            highlight_cell(color, [0.5, 0.5, 0.5], row)
 
     plt.imsave(arr=color, fname=os.path.join(landsat_dir_name, "ndvi.jpg"))
 
 print("Saving data...")
-sea = grid[grid["mean_depth"] < 0].copy()
+sea = grid[grid["max_depth"] < args.mindepth].copy()
 kelp = sea[sea["mean_ndvi"] > filter_ndvi].copy()
 
 kelp["lat"] = (kelp["top"] - kelp["bottom"]) / 2.0 + kelp["bottom"]
