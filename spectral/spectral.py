@@ -28,12 +28,13 @@ parser.add_argument("bathymetry", help="path to file containing bathymetry data"
 parser.add_argument("output", help="path for resulting CSV dataset")
 parser.add_argument("--bathymetry2", help="additional path to file containing more bathymetry data")
 parser.add_argument("-g", "--gridsize", help="number of cells per side in grid", type=int, default=300)
-parser.add_argument("-q", "--quantile", help="quantile of extracted NDVI", type=float, default=0.99)
+parser.add_argument("-q", "--quantile", help="quantile of extracted NDVI", type=float, default=0.95)
 parser.add_argument("-t", "--threshold", help="NDVI threshold", type=float)
 parser.add_argument("-i", "--image", help="generate image", action="store_true")
 parser.add_argument("-m", "--mindepth", help="min depth of water for detection", type=float, default=-5)
 parser.add_argument("-cx", "--correction_x", help="x correction in pixels to achieve precise alignment between bathymetry and spectral images", type=int, default=0)
 parser.add_argument("-cy", "--correction_y", help="y correction in pixels to achieve precise alignment between bathymetry and spectral images", type=int, default=0)
+parser.add_argument("-x", "--max", help="use max ndvi for esch cell (as opposed to mean)", action="store_true")
 args = parser.parse_args()
 
 
@@ -51,20 +52,42 @@ b4_file = [fn for fn in all_bands if fn.endswith("_B4.TIF")][0]
 b5_file = [fn for fn in all_bands if fn.endswith("_B5.TIF")][0]
 color_file = [fn for fn in all_bands if fn.endswith("_T1.jpg")][0]
 
+has_mask = False
+mask_files = [fn for fn in all_bands if fn.endswith("_MASK.TIF")]
+if len(mask_files)>0:
+    has_mask = True
+    mask_file = mask_files[0]
+
 
 print("Reading Band 4 file: " + b4_file)
 print("Reading Band 5 file: " + b5_file)
 print("Reading Color file: " + color_file)
+
+if has_mask:
+    print("Reading Mask file: " + mask_file)
+
 print("Quantile: " + str(args.quantile))
 print("Threshold: " + str(args.threshold))
 print("Min depth: " + str(args.mindepth))
 print("Correction X: " + str(args.correction_x))
 print("Correction Y: " + str(args.correction_y))
 
+stat = "mean"
+if args.max:
+    stat="max"
+
+print("NDVI aggregation: " + stat)
+
 ###########################
 
 b4 = plt.imread(os.path.join(landsat_dir_name, b4_file)) # red
 b5 = plt.imread(os.path.join(landsat_dir_name, b5_file)) # infrared
+
+if has_mask:
+    mask = plt.imread(os.path.join(landsat_dir_name, mask_file)) # mask
+    new_mask = np.ones(mask.shape)
+    np.place(new_mask, mask == 0, np.nan) # mask with 1s in valid pixels, nan where we must ignore
+
 color_img = plt.imread(os.path.join(landsat_dir_name, color_file))
 
 # get the existing coordinate system
@@ -143,11 +166,12 @@ b4 = b4[0:image_height, 0:image_width]
 b5 = b5[0:image_height, 0:image_width]
 color = color_img[0:image_height, 0:image_width].copy()
 
+if has_mask:
+    new_mask = new_mask[0:image_height, 0:image_width]
 ##############################
 
 # ## Create grid
 print("Creating grid...")
-
 grid = pd.DataFrame(index=np.arange(0, grid_size_h * grid_size_v),
                     columns=["i", "j", "top", "left", "bottom", "right", "pxtop", "pxleft", "pxbottom", "pxright"])
 
@@ -211,9 +235,11 @@ red_float = b4.astype(float)
 den = ir_float + red_float
 den[den == 0] = np.nan
 ndvi = np.divide(ir_float - red_float, den)
+if has_mask:
+    ndvi = np.multiply(ndvi, new_mask)
 
 # create a new dataframe to hold the ndvi value for each cell in the grid
-# to get the ndvi for each cell, we compute the mean ndvi value for all image pixels
+# to get the ndvi for each cell, we compute the mean or max ndvi value for all image pixels
 # that fall in that cell
 ndvi_grid = pd.DataFrame(index=np.arange(0, grid_size_h * grid_size_v), columns=["mean_ndvi"])
 
@@ -227,7 +253,11 @@ for i in range(0, grid_size_v):
         # extract all image pixels within the boundaries
         myslice = ndvi[pxtop:pxbottom, pxleft:pxright].reshape(-1)
         # average the NDVI fot the extracted pixels
-        mymean = np.mean(myslice)
+        mymean = 0
+        if args.max:
+            mymean = np.max(myslice)
+        else:
+            mymean = np.mean(myslice)
         # save value in the NDVI dataframe at the corresponding location
         ndvi_grid.loc[i * grid_size_h + j] = [mymean]
 
@@ -258,11 +288,11 @@ if args.image:
 
     for row in grid.itertuples():
         if np.isnan(row.max_depth) or row.max_depth>args.mindepth:
-            highlight_cell(color, [0, 0, 0], row)
+            highlight_cell(color, [0.2, 0.2, 0.2], row)
         elif row.max_depth < args.mindepth and row.mean_ndvi > filter_ndvi:
-            highlight_cell(color, [255, 0, 0], row, True)
+            highlight_cell(color, [3.0, 0, 0], row)
 
-    plt.imsave(arr=color, fname=os.path.join(landsat_dir_name, "ndvi.jpg"))
+    plt.imsave(arr=color, fname=os.path.join(landsat_dir_name, os.path.dirname(landsat_dir_name)+".jpg"))
 
 print("Saving data...")
 sea = grid[grid["max_depth"] < args.mindepth].copy()
