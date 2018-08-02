@@ -1,0 +1,31 @@
+geometry,Geometry,
+polygon_id,Polygon ID,
+land_distance,Land Distance,km
+pretected_areas,Protected Areas,km
+county,County,
+critical_species,Critical Species,km
+nes_estab_pct,Estab,%
+annual_avg_emplvl,Annual Avg Empl Lvl,%
+qcew_emp_pct,QCEW Employment,%
+unemployment_rate,Unemployment Rate,%
+biomass,Kelp,
+depth,Depth,m
+mean_sst,Mean Sea Surface Temp,C
+max_sst,Max Sea Surface Temp,C
+min_sst,Min Sea Surface Temp,C
+ndvi,NDVI,
+z_min_light,Min Light,
+z_mixedl,Mixed Layer,
+floor_temp,Floor Temperature,C
+viable,Viable,
+boat_launches,Boat Launches,
+halibut_trawl_sites,Halibut Trawl Sites,
+marinas,Marinas,
+ports,Ports,
+oil_platforms,Oil Platforms,
+piers,Piers,
+shoretype,Shore Type,
+shoretype2,Shore Type 2,
+aerial_kelp,Aerial Kelp,
+admin_kelp_bed,Admin Kelp Bed,
+alpha,Alpha,
