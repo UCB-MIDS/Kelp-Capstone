@@ -2,30 +2,30 @@ geometry,Geometry,
 polygon_id,Polygon ID,
 land_distance,Land Distance,km
 pretected_areas,Protected Areas,km
-county,County,
+county,Nearest County,
 critical_species,Critical Species,km
-nes_estab_pct,Estab,%
-annual_avg_emplvl,Annual Avg Empl Lvl,%
-qcew_emp_pct,QCEW Employment,%
-unemployment_rate,Unemployment Rate,%
-biomass,Kelp,
+nes_estab_pct,Fishing Establishment Pct,%
+annual_avg_emplvl,Annual Avg Empl Level,%
+qcew_emp_pct,Fishing Employment Pct,%
+unemployment_rate,County Unemployment Rate,%
+biomass,Kelp,kg
 depth,Depth,m
 mean_sst,Mean Sea Surface Temp,C
 max_sst,Max Sea Surface Temp,C
 min_sst,Min Sea Surface Temp,C
 ndvi,NDVI,
-z_min_light,Min Light,
-z_mixedl,Mixed Layer,
-floor_temp,Floor Temperature,C
-viable,Viable,
-boat_launches,Boat Launches,
-halibut_trawl_sites,Halibut Trawl Sites,
-marinas,Marinas,
-ports,Ports,
-oil_platforms,Oil Platforms,
-piers,Piers,
-shoretype,Shore Type,
-shoretype2,Shore Type 2,
-aerial_kelp,Aerial Kelp,
-admin_kelp_bed,Admin Kelp Bed,
+z_min_light,Depth of Min Light,m
+z_mixedl,Mixed Layer Depth,m
+floor_temp,Sea Floor Temperature,C
+viable,Viable Site,Boolean
+boat_launches,Boat Launches,km
+halibut_trawl_sites,Halibut Trawl Sites,km
+marinas,Marinas,km
+ports,Ports,km
+oil_platforms,Oil Platforms,km
+piers,Piers,km
+shoretype,Shore Type,categorical
+shoretype2,Shore Type 2,categorical
+aerial_kelp,Aerial Kelp Sites,Boolean
+admin_kelp_bed,DFW Kelp Bed Distinction,categorical
 alpha,Alpha,
