@@ -2,7 +2,7 @@ geometry,Geometry,,
 polygon_id,Polygon ID,,
 land_distance,Land Distance,km,Geographical
 protected_areas,Protected Areas,km,Geographical
-county,Nearest County,,Human
+county,Nearest County,categorical,Human
 critical_species,Critical Species,km,Geographical
 nes_estab_pct,Fishing Establishment Pct,%,Human
 annual_avg_emplvl,Annual Avg Empl Level,%,Human
@@ -13,7 +13,7 @@ depth,Depth,m,Biological
 mean_sst,Mean Sea Surface Temp,C,Biological
 max_sst,Max Sea Surface Temp,C,Biological
 min_sst,Min Sea Surface Temp,C,Biological
-ndvi,NDVI,-,
+ndvi,NDVI,-,Biological
 z_min_light,Depth of Min Light,m,Biological
 z_mixedl,Mixed Layer Depth,m,Biological
 floor_temp,Sea Floor Temperature,C,Biological
@@ -29,4 +29,4 @@ shoretype2,Shore Type 2,categorical,Biological
 aerial_kelp,Aerial Kelp Sites,Boolean,
 admin_kelp_bed,DFW Kelp Bed Distinction,categorical,
 alpha,Alpha,,
-substrate,Substrate,,Biological
+substrate,Substrate,categorical,Biological
