@@ -1,32 +1,32 @@
-geometry,Geometry,,
-polygon_id,Polygon ID,,
-land_distance,Land Distance,km,Geographical
-protected_areas,Protected Areas,km,Geographical
-county,Nearest County,categorical,Human
-critical_species,Critical Species,km,Geographical
-nes_estab_pct,Fishing Establishment Pct,%,Human
-annual_avg_emplvl,Annual Avg Empl Level,%,Human
-qcew_emp_pct,Fishing Employment Pct,%,Human
-unemployment_rate,County Unemployment Rate,%,Human
-biomass,Kelp,kg,
-depth,Depth,m,Biological
-mean_sst,Mean Sea Surface Temp,C,Biological
-max_sst,Max Sea Surface Temp,C,Biological
-min_sst,Min Sea Surface Temp,C,Biological
-ndvi,NDVI,-,Biological
-z_min_light,Depth of Min Light,m,Biological
-z_mixedl,Mixed Layer Depth,m,Biological
-floor_temp,Sea Floor Temperature,C,Biological
-viable,Viable Site,Boolean,
-boat_launches,Boat Launches,km,Geographical
-halibut_trawl_sites,Halibut Trawl Sites,km,Geographical
-marinas,Marinas,km,Geographical
-ports,Ports,km,Geographical
-oil_platforms,Oil Platforms,km,Geographical
-piers,Piers,km,Geographical
-shoretype,Shore Type,categorical,Biological
-shoretype2,Shore Type 2,categorical,Biological
-aerial_kelp,Aerial Kelp Sites,Boolean,
-admin_kelp_bed,DFW Kelp Bed Distinction,categorical,
-alpha,Alpha,,
-substrate,Substrate,categorical,Biological
+geometry,Geometry,,,
+polygon_id,Polygon ID,,,
+land_distance,Land Distance,km,Geographical,The distance to the nearest land
+protected_areas,Protected Areas,km,Geographical,"Desingated State Marine Protection Areas, which includes State Marine Reserves, State Marine Conservation Areas, State Marine Conservation Areas, State Marine Parks, State Marine Recreational Management Area, and Special Closures "
+county,Nearest County,,Human,The nearest county
+critical_species,Critical Species,km,Geographical,Critical species habitat as specified by the Endangered Species Act
+nes_estab_pct,Fishing Establishment Pct,%,Human,The percentage of establishments in the nearest county that are devoted to the fishing industry
+annual_avg_emplvl,Annual Avg Empl Level,%,Human,The number of employees in the nearest county that are devoted to the fishing industry
+qcew_emp_pct,Fishing Employment Pct,%,Human,The percentage of jobs in the nearest county that are devoted to the fishing industry
+unemployment_rate,County Unemployment Rate,%,Human,The unemployment rate for the county closest to the site
+biomass,Kelp,kg,,
+depth,Depth,m,Biological,The average depth of the site
+mean_sst,Mean Sea Surface Temp,C,Biological,The monthly mean sea surface temperature for the site
+max_sst,Max Sea Surface Temp,C,Biological,The average monthly maximum sea surface temperature for the site
+min_sst,Min Sea Surface Temp,C,Biological,The average monthly minimum sea surgace temperature for the site
+ndvi,NDVI,-,,The NDVI value for the site
+z_min_light,Depth of Min Light,m,Biological,The depth at which the minimum light is greater than 50 E/m^2
+z_mixedl,Mixed Layer Depth,m,Biological,The depth of the mixed layer
+floor_temp,Sea Floor Temperature,C,Biological,The temperature of the sea floor
+viable,Viable Site,Boolean,,
+boat_launches,Boat Launches,km,Geographical,The nearest boat launch sites
+halibut_trawl_sites,Halibut Trawl Sites,km,Geographical,The nearest halibut trawl sites
+marinas,Marinas,km,Geographical,The nearest marinas
+ports,Ports,km,Geographical,The nearest ports
+oil_platforms,Oil Platforms,km,Geographical,The nearest oil platforms
+piers,Piers,km,Geographical,The nearest piers
+shoretype,Shore Type,categorical,Biological,The primary shoretype at the site
+shoretype2,Shore Type 2,categorical,Biological,The secondary shoretype at the site
+aerial_kelp,Aerial Kelp Sites,Boolean,,Boolean of whether there was kelp detected at the site via aerial survey
+admin_kelp_bed,DFW Kelp Bed Distinction,categorical,,The status of administrative kelp beds at the site
+alpha,Alpha,,,
+substrate,Substrate,,Biological,The substrate type at the site
