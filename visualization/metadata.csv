@@ -13,7 +13,7 @@ depth,Depth,m
 mean_sst,Mean Sea Surface Temp,C
 max_sst,Max Sea Surface Temp,C
 min_sst,Min Sea Surface Temp,C
-ndvi,NDVI,
+ndvi,NDVI,-
 z_min_light,Depth of Min Light,m
 z_mixedl,Mixed Layer Depth,m
 floor_temp,Sea Floor Temperature,C
