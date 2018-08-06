@@ -29,4 +29,4 @@ shoretype2,Shore Type 2,categorical,Biological,The secondary shoretype at the si
 aerial_kelp,Aerial Kelp Sites,Boolean,,Boolean of whether there was kelp detected at the site via aerial survey
 admin_kelp_bed,DFW Kelp Bed Distinction,categorical,,The status of administrative kelp beds at the site
 alpha,Alpha,,,
-substrate,Substrate,,Biological,The substrate type at the site
+substrate,Substrate,categorical,Biological,The substrate type at the site
