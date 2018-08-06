@@ -1,7 +1,7 @@
 geometry,Geometry,,,
 polygon_id,Polygon ID,,,
 land_distance,Land Distance,km,Geographical,The distance to the nearest land
-protected_areas,Protected Areas,km,Geographical,"Desingated State Marine Protection Areas, which includes State Marine Reserves, State Marine Conservation Areas, State Marine Conservation Areas, State Marine Parks, State Marine Recreational Management Area, and Special Closures "
+protected_areas,Protected Areas,km,Geographical,"Designated State Marine Protection Areas, which includes State Marine Reserves, State Marine Conservation Areas, State Marine Conservation Areas, State Marine Parks, State Marine Recreational Management Area, and Special Closures"
 county,Nearest County,,Human,The nearest county
 critical_species,Critical Species,km,Geographical,Critical species habitat as specified by the Endangered Species Act
 nes_estab_pct,Fishing Establishment Pct,%,Human,The percentage of establishments in the nearest county that are devoted to the fishing industry
